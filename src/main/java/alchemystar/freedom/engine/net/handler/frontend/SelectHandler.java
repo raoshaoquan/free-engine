@@ -29,6 +29,9 @@ public final class SelectHandler {
             case ServerParseSelect.VERSION:
                 SelectVersion.response(c);
                 break;
+            case ServerParseSelect.CONNECTION_ID:
+                SelectConnID.response(c);
+                break;
             default:
                 if (selectIncrement.equals(stmt)) {
                     SelectIncrementResponse.response(c);
