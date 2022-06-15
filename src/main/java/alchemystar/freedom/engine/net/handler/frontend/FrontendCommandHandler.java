@@ -2,6 +2,7 @@ package alchemystar.freedom.engine.net.handler.frontend;
 
 import java.util.Date;
 
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  *
  * @Author lizhuyang
  */
-public class FrontendCommandHandler extends ChannelHandlerAdapter {
+public class FrontendCommandHandler extends ChannelInboundHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(ChannelHandlerAdapter.class);
 

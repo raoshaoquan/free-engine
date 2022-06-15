@@ -14,15 +14,15 @@ import alchemystar.freedom.test.BasicSelectTest;
  */
 public class SelectTest extends BasicSelectTest {
 
-    public static final String singleSql = "select id,name,comment from test where id=1";
+    public static final String singleSql = "select id,name,comment from test123 where id=1";
 
-    public static final String wildCardSql = "select * from test ";
+    public static final String wildCardSql = "select * from test123 ";
 
     public static final String joinSql =
-            "select 'a.id='+a.id,'b.id='+b.id,'c.id='+c.id,'a.name='+a.name from test as a join test as b on a.id=b"
+            "select 'a.id='+a.id,'b.id='+b.id,'c.id='+c.id,'a.name='+a.name from test123 as a join test123 as b on a.id=b"
                     + ".id+1 "
                     + "join "
-                    + "test as"
+                    + "test123 as"
                     + " c "
                     + "where a"
                     + ".id>=3 and a.id < 10 and "

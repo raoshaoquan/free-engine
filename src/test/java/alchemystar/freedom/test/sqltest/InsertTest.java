@@ -13,7 +13,7 @@ import alchemystar.freedom.test.bptest.BasicGenTable;
  */
 public class InsertTest extends BasicGenTable {
 
-    public static final String insertSqlTemplate = "insert into test (id,name,comment) values (?,?,?)";
+    public static final String insertSqlTemplate = "insert into test123 (id,name,comment) values (?,?,?)";
 
     @Before
     public void init() {

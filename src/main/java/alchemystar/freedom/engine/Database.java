@@ -10,11 +10,11 @@ import alchemystar.freedom.store.log.LogStore;
 public class Database {
 
     private static Database database = null;
-    // 默认端口号是8090
+    // 默认端口号是3062
     private int serverPort = 8090;
-    // 默认用户名密码是pay|miracle
+    // 默认用户名密码是pay|123456
     private String userName = "pay";
-    private String passWd = "MiraCle";
+    private String passWd = "123456";
     private TableLoader tableLoader;
     private LogStore logStore;
 
@@ -25,8 +25,10 @@ public class Database {
         TableLoader tableLoader = new TableLoader();
         tableLoader.readAllTable();
         database.setTableLoader(tableLoader);
+
         LogStore logStore = new LogStore();
         database.setLogStore(logStore);
+
         RecoverManager recoverManager = new RecoverManager();
         recoverManager.setLogStore(logStore);
         recoverManager.recover();

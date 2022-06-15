@@ -52,7 +52,7 @@ public abstract class BaseIndex implements Index {
         this.table = table;
         this.indexName = indexName;
         this.attributes = attributes;
-        path = SystemConfig.RELATION_FILE_PRE_FIX + indexName;
+        path = SystemConfig.FREEDOM_REL_IDX_PATH + "/" + indexName;
         pageNoAllocator = new PageNoAllocator();
         fStore = new FStore(path);
         fStore.open();

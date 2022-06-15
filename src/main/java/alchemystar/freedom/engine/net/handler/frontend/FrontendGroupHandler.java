@@ -2,6 +2,7 @@ package alchemystar.freedom.engine.net.handler.frontend;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +14,7 @@ import io.netty.channel.ChannelHandlerContext;
  *
  * @Author lizhuyang
  */
-public class FrontendGroupHandler extends ChannelHandlerAdapter {
+public class FrontendGroupHandler extends ChannelInboundHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(FrontendGroupHandler.class);
 

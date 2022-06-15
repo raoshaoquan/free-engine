@@ -1,5 +1,6 @@
 package alchemystar.freedom.engine.server;
 
+import alchemystar.freedom.config.SystemConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +28,11 @@ public class FreedomServer extends Thread {
     public static void main(String[] args) {
         FreedomServer server = new FreedomServer();
         try {
+            logger.info("db path: " + SystemConfig.RELATION_FILE_PRE_FIX);
             server.start();
             while (true) {
                 try {
-                    Thread.sleep(1000 * 300);
+                    Thread.sleep(300 * 1000L);
                 }catch (Exception e){
                     // just ignore it
                 }
@@ -55,6 +57,10 @@ public class FreedomServer extends Thread {
         try {
             // Freedom Server
             Database database = Database.getInstance();
+            database.setServerPort(8090);
+            database.setUserName("pay");
+            database.setPassWd("123456");
+
             ServerBootstrap b = new ServerBootstrap();
             // 这边的childHandler是用来管理accept的
             // 由于线程间传递的是byte[],所以内存池okay

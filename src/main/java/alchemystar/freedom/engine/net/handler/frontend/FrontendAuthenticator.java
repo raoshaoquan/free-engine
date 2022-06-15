@@ -3,6 +3,8 @@ package alchemystar.freedom.engine.net.handler.frontend;
 import java.net.InetSocketAddress;
 import java.security.NoSuchAlgorithmException;
 
+import io.netty.channel.ChannelDuplexHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +28,7 @@ import io.netty.channel.ChannelHandlerContext;
  *
  * @Author lizhuyang
  */
-public class FrontendAuthenticator extends ChannelHandlerAdapter {
+public class FrontendAuthenticator extends ChannelInboundHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(FrontendAuthenticator.class);
 
@@ -45,7 +47,7 @@ public class FrontendAuthenticator extends ChannelHandlerAdapter {
      * @throws Exception
      */
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         // ctx bind
         source.setCtx(ctx);
         // 生成认证数据

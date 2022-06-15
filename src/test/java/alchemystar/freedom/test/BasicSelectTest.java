@@ -11,7 +11,7 @@ import alchemystar.freedom.test.sqltest.CreateTest;
  */
 public class BasicSelectTest extends BasicGenTable {
 
-    public static final String insertSqlTemplate = "insert into test (id,name) values (?,?)";
+    public static final String insertSqlTemplate = "insert into test123 (id,name) values (?,?)";
 
     @Before
     public void init() {

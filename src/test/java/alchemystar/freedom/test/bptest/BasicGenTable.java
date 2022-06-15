@@ -12,7 +12,7 @@ public class BasicGenTable {
 
     public Table genTable() {
         Table table = new Table();
-        table.setName("test");
+        table.setName("test123");
         table.setAttributes(getTableAttributes());
         BPTree clusterIndex = new BPTree(table, "clusterIndex", getClusterAttributes());
         clusterIndex.setPrimaryKey(true);

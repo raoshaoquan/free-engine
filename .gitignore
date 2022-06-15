@@ -26,3 +26,8 @@ target
 
 # git
 *.orig
+
+#db
+tmp/
+dbname
+dbclusterIndex

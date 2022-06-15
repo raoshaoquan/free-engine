@@ -7,32 +7,39 @@ import alchemystar.freedom.engine.net.proto.util.Isolations;
  *
  * @Author lizhuyang
  */
-public interface SystemConfig {
+public class SystemConfig {
 
-    // todo 不同表,不同文件夹路径
+    //TODO: 不同表,不同文件夹路径
 
-    int DEFAULT_PAGE_SIZE = 4096;
+    public static final int DEFAULT_PAGE_SIZE = 4096;
 
-    int DEFAULT_SPECIAL_POINT_LENGTH = 64;
+    public static final int DEFAULT_SPECIAL_POINT_LENGTH = 64;
 
-    String RELATION_FILE_PRE_FIX = "/Users/alchemystar/var/freedom/";
+    /** 工作目录 */
+    public static final String RELATION_FILE_PRE_FIX = System.getProperty("user.dir") + "/tmp";
 
-    String FREEDOM_REL_DATA_PATH = RELATION_FILE_PRE_FIX + "/data";
+    /** 数据目录 */
+    public static final String FREEDOM_REL_DATA_PATH = RELATION_FILE_PRE_FIX + "/data";
 
-    String FREEDOM_REL_META_PATH = RELATION_FILE_PRE_FIX + "/meta";
+    /** 索引目录 */
+    public static final String FREEDOM_REL_IDX_PATH = RELATION_FILE_PRE_FIX + "/idx";
 
-    String FREEDOM_LOG_FILE_NAME = RELATION_FILE_PRE_FIX + "/log/log";
+    /** 数据目录 */
+    public static final String FREEDOM_REL_META_PATH = RELATION_FILE_PRE_FIX + "/meta";
 
-    String Database = "";
+    /** binlog */
+    public static final String FREEDOM_LOG_FILE_NAME = RELATION_FILE_PRE_FIX + "/log/bin.log";
+
+    public static final String Database = "";
     // 36小时内连接不发起请求就干掉 秒为单位
     // long IDLE_TIME_OUT = 36 * 3600 * 1000;
-    long IDLE_TIME_OUT = 36 * 3600;
+    public static final long IDLE_TIME_OUT = 36 * 3600;
 
     // 1小时做一次idle check 秒为单位
     //int IDLE_CHECK_INTERVAL = 3600 * 1000;
-    int IDLE_CHECK_INTERVAL = 3600;
+    public static final int IDLE_CHECK_INTERVAL = 3600;
 
-    String DEFAULT_CHARSET = "gbk";
+    public static final String DEFAULT_CHARSET = "utf-8";
 
-    int DEFAULT_TX_ISOLATION = Isolations.REPEATED_READ;
+    public static final int DEFAULT_TX_ISOLATION = Isolations.REPEATED_READ;
 }

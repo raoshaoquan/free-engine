@@ -16,7 +16,7 @@ import alchemystar.freedom.transaction.log.Log;
  */
 public class LogTest {
 
-    public static final String insertSqlTemplate = "insert into test (id,name) values (?,?)";
+    public static final String insertSqlTemplate = "insert into test123 (id,name) values (?,?)";
 
     @Test
     public void testWrite() {
@@ -29,7 +29,9 @@ public class LogTest {
     public void testRead() {
         LogStore logStore = new LogStore();
         List<Log> list = logStore.loadLog();
-        System.out.println(list);
+        for (Log log : list) {
+            System.out.println(log);
+        }
     }
 
     private void insertSome() {

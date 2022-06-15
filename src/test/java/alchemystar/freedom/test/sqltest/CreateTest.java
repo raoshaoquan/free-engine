@@ -9,7 +9,7 @@ import alchemystar.freedom.sql.SqlExecutor;
  */
 public class CreateTest {
 
-    public static String CREATE_SQL = "create table test (id bigint,name varchar(256),comment varchar(256), PRIMARY "
+    public static String CREATE_SQL = "create table test123 (id bigint,name varchar(256),comment varchar(256), PRIMARY "
             + "KEY "
             + "('id'),"
             + "KEY name ('name'));";

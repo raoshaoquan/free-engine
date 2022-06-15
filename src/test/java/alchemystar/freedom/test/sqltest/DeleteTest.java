@@ -11,7 +11,7 @@ import alchemystar.freedom.test.BasicSelectTest;
  */
 public class DeleteTest extends BasicSelectTest {
 
-    public static final String deleteSql = "delete from test where id>=1";
+    public static final String deleteSql = "delete from test123 where id>=1";
 
     @Test
     public void test() {
