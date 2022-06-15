@@ -1,8 +1,6 @@
 package alchemystar.freedom.engine.net.handler.frontend;
 
-import alchemystar.freedom.engine.net.response.SelectDatabase;
-import alchemystar.freedom.engine.net.response.SelectVersion;
-import alchemystar.freedom.engine.net.response.SelectVersionComment;
+import alchemystar.freedom.engine.net.response.*;
 import alchemystar.freedom.engine.net.response.jdbc.SelectIncrementResponse;
 import alchemystar.freedom.engine.parser.ServerParse;
 import alchemystar.freedom.engine.parser.ServerParseSelect;
@@ -24,6 +22,9 @@ public final class SelectHandler {
                 break;
             case ServerParseSelect.VERSION_COMMENT:
                 SelectVersionComment.response(c);
+                break;
+            case ServerParseSelect.USER:
+                SelectUser.response(c);
                 break;
             case ServerParseSelect.VERSION:
                 SelectVersion.response(c);
