@@ -883,7 +883,7 @@ public class BPNode {
     private int getBorrowKeyLength(IndexEntry key) {
         // 因为borrowKey的话,需要将child也borrow过来
         if (!isLeaf) {
-            return Item.getItemLength(key) + ItemConst.INT_LEANGTH;
+            return Item.getItemLength(key) + ItemConst.INT_LENGTH;
         } else {
             return Item.getItemLength(key);
         }

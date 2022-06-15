@@ -48,10 +48,10 @@ public class BpPage extends Page {
 
     private void init() {
         leafInitFreeSpace =
-                length - SystemConfig.DEFAULT_SPECIAL_POINT_LENGTH - ItemConst.INT_LEANGTH * 7 - PageHeaderData
+                length - SystemConfig.DEFAULT_SPECIAL_POINT_LENGTH - ItemConst.INT_LENGTH * 7 - PageHeaderData
                         .PAGE_HEADER_SIZE;
         nodeInitFreeSpace =
-                length - SystemConfig.DEFAULT_SPECIAL_POINT_LENGTH - ItemConst.INT_LEANGTH * 6 - PageHeaderData
+                length - SystemConfig.DEFAULT_SPECIAL_POINT_LENGTH - ItemConst.INT_LENGTH * 6 - PageHeaderData
                         .PAGE_HEADER_SIZE;
     }
 
@@ -147,7 +147,7 @@ public class BpPage extends Page {
         }
         if (!bpNode.isLeaf()) {
             for (int i = 0; i < bpNode.getChildren().size(); i++) {
-                size += ItemConst.INT_LEANGTH;
+                size += ItemConst.INT_LENGTH;
             }
         }
         return size;
