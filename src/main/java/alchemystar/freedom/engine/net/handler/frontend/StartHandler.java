@@ -17,7 +17,7 @@ public final class StartHandler {
                 c.writeErrMessage(ErrorCode.ER_UNKNOWN_COM_ERROR, "Unsupported statement");
                 break;
             default:
-                // todo data source
+                //TODO: data source
                   c.execute(stmt, ServerParse.START);
                 break;
         }

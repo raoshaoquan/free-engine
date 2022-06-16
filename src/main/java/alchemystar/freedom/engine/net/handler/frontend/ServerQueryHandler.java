@@ -21,6 +21,7 @@ public class ServerQueryHandler implements FrontendQueryHandler {
         this.source = source;
     }
 
+    @Override
     public void query(String origin) {
 
         logger.info("sql = " + origin);
@@ -67,7 +68,7 @@ public class ServerQueryHandler implements FrontendQueryHandler {
                 UseHandler.handle(sql, source, rs >>> 8);
                 break;
             default:
-                // todo add no modify exception
+                //TODO: add no modify exception
                 source.execute(sql, rs);
         }
     }

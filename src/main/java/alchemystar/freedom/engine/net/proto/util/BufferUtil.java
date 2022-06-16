@@ -15,7 +15,7 @@ public class BufferUtil {
         buffer.writeBytes(b);
     }
 
-    public static final void writeUB2(ByteBuf buffer, int i) {
+    public static final void writeUByte2(ByteBuf buffer, int i) {
         buffer.writeByte((byte) (i & 0xff));
         buffer.writeByte((byte) (i >>> 8));
     }
@@ -32,7 +32,7 @@ public class BufferUtil {
         }
     }
 
-    public static final void writeUB3(ByteBuf buffer, int i) {
+    public static final void writeUByte3(ByteBuf buffer, int i) {
         buffer.writeByte((byte) (i & 0xff));
         buffer.writeByte((byte) (i >>> 8));
         buffer.writeByte((byte) (i >>> 16));
@@ -49,7 +49,7 @@ public class BufferUtil {
         writeInt(buffer, Float.floatToIntBits(f));
     }
 
-    public static final void writeUB4(ByteBuf buffer, long l) {
+    public static final void writeUByte4(ByteBuf buffer, long l) {
         buffer.writeByte((byte) (l & 0xff));
         buffer.writeByte((byte) (l >>> 8));
         buffer.writeByte((byte) (l >>> 16));
@@ -76,10 +76,10 @@ public class BufferUtil {
             buffer.writeByte((byte) l);
         } else if (l < 0x10000L) {
             buffer.writeByte((byte) 252);
-            writeUB2(buffer, (int) l);
+            writeUByte2(buffer, (int) l);
         } else if (l < 0x1000000L) {
             buffer.writeByte((byte) 253);
-            writeUB3(buffer, (int) l);
+            writeUByte3(buffer, (int) l);
         } else {
             buffer.writeByte((byte) 254);
             writeLong(buffer, l);
@@ -97,10 +97,10 @@ public class BufferUtil {
             buffer.writeByte((byte) length);
         } else if (length < 0x10000L) {
             buffer.writeByte((byte) 252);
-            writeUB2(buffer, length);
+            writeUByte2(buffer, length);
         } else if (length < 0x1000000L) {
             buffer.writeByte((byte) 253);
-            writeUB3(buffer, length);
+            writeUByte3(buffer, length);
         } else {
             buffer.writeByte((byte) 254);
             writeLong(buffer, length);

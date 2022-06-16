@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 /**
  * Error Packet
+ * https://dev.mysql.com/doc/internals/en/packet-ERR_Packet.html
  *
  * @Author lizhuyang
  */
@@ -26,7 +27,7 @@ public class ErrorPacket extends MySQLPacket {
         packetId = bin.packetId;
         MySQLMessage mm = new MySQLMessage(bin.data);
         fieldCount = mm.read();
-        errno = mm.readUB2();
+        errno = mm.readUByte2();
         if (mm.hasRemaining() && (mm.read(mm.position()) == SQLSTATE_MARKER)) {
             mm.read();
             sqlState = mm.readBytes(5);
@@ -36,10 +37,10 @@ public class ErrorPacket extends MySQLPacket {
 
     public void read(byte[] data) {
         MySQLMessage mm = new MySQLMessage(data);
-        packetLength = mm.readUB3();
+        packetLength = mm.readUByte3();
         packetId = mm.read();
         fieldCount = mm.read();
-        errno = mm.readUB2();
+        errno = mm.readUByte2();
         if (mm.hasRemaining() && (mm.read(mm.position()) == SQLSTATE_MARKER)) {
             mm.read();
             sqlState = mm.readBytes(5);
@@ -52,10 +53,10 @@ public class ErrorPacket extends MySQLPacket {
         int size = calcPacketSize();
         // default 256 , no need to check and auto expand
         ByteBuf buffer = ctx.alloc().buffer();
-        BufferUtil.writeUB3(buffer, size);
+        BufferUtil.writeUByte3(buffer, size);
         buffer.writeByte(packetId);
         buffer.writeByte(fieldCount);
-        BufferUtil.writeUB2(buffer, errno);
+        BufferUtil.writeUByte2(buffer, errno);
         buffer.writeByte(mark);
         buffer.writeBytes(sqlState);
         if (message != null) {

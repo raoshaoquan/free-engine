@@ -63,14 +63,14 @@ public class MySQLMessage {
         return data[position++];
     }
 
-    public int readUB2() {
+    public int readUByte2() {
         final byte[] b = this.data;
         int i = b[position++] & 0xff;
         i |= (b[position++] & 0xff) << 8;
         return i;
     }
 
-    public int readUB3() {
+    public int readUByte3() {
         final byte[] b = this.data;
         int i = b[position++] & 0xff;
         i |= (b[position++] & 0xff) << 8;
@@ -78,7 +78,7 @@ public class MySQLMessage {
         return i;
     }
 
-    public long readUB4() {
+    public long readUByte4() {
         final byte[] b = this.data;
         long l = (long) (b[position++] & 0xff);
         l |= (long) (b[position++] & 0xff) << 8;
@@ -141,9 +141,9 @@ public class MySQLMessage {
             case 251:
                 return NULL_LENGTH;
             case 252:
-                return readUB2();
+                return readUByte2();
             case 253:
-                return readUB3();
+                return readUByte3();
             case 254:
                 return readLong();
             default:
@@ -321,14 +321,14 @@ public class MySQLMessage {
 
     public java.util.Date readDate() {
         byte length = read();
-        int year = readUB2();
+        int year = readUByte2();
         byte month = read();
         byte date = read();
         int hour = read();
         int minute = read();
         int second = read();
         if (length == 11) {
-            long nanos = readUB4();
+            long nanos = readUByte4();
             Calendar cal = getLocalCalendar();
             cal.set(year, --month, date, hour, minute, second);
             Timestamp time = new Timestamp(cal.getTimeInMillis());

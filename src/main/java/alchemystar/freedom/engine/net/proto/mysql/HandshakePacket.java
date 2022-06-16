@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 /**
  * MySql握手包
+ * https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake
  *
  * @Author lizhuyang
  */
@@ -29,27 +30,28 @@ public class HandshakePacket extends MySQLPacket {
         MySQLMessage mm = new MySQLMessage(bin.data);
         protocolVersion = mm.read();
         serverVersion = mm.readBytesWithNull();
-        threadId = mm.readUB4();
+        threadId = mm.readUByte4();
         seed = mm.readBytesWithNull();
-        serverCapabilities = mm.readUB2();
+        serverCapabilities = mm.readUByte2();
         serverCharsetIndex = mm.read();
-        serverStatus = mm.readUB2();
+        serverStatus = mm.readUByte2();
         mm.move(13);
         restOfScrambleBuff = mm.readBytesWithNull();
     }
 
+    @Override
     public void write(final ChannelHandlerContext ctx) {
         // default init 256,so it can avoid buff extract
         final ByteBuf buffer = ctx.alloc().buffer();
-        BufferUtil.writeUB3(buffer, calcPacketSize());
+        BufferUtil.writeUByte3(buffer, calcPacketSize());
         buffer.writeByte(packetId);
         buffer.writeByte(protocolVersion);
         BufferUtil.writeWithNull(buffer, serverVersion);
-        BufferUtil.writeUB4(buffer, threadId);
+        BufferUtil.writeUByte4(buffer, threadId);
         BufferUtil.writeWithNull(buffer, seed);
-        BufferUtil.writeUB2(buffer, serverCapabilities);
+        BufferUtil.writeUByte2(buffer, serverCapabilities);
         buffer.writeByte(serverCharsetIndex);
-        BufferUtil.writeUB2(buffer, serverStatus);
+        BufferUtil.writeUByte2(buffer, serverStatus);
         buffer.writeBytes(FILLER_13);
         // buffer.position(buffer.position() + 13);
         BufferUtil.writeWithNull(buffer, restOfScrambleBuff);

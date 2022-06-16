@@ -24,8 +24,8 @@ import alchemystar.freedom.util.ValueConvertUtil;
  */
 public abstract class BaseIndex implements Index {
 
-    // todo 假设当前的key肯定是唯一的
-    // todo 先搞定key为唯一的情况,再解决不唯一的key情况
+    //TODO: 假设当前的key肯定是唯一的
+    //TODO: 先搞定key为唯一的情况,再解决不唯一的key情况
 
     // 隶属于哪个relation
     protected Table table;

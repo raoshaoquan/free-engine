@@ -28,8 +28,8 @@ public class OkPacket extends MySQLPacket {
         fieldCount = mm.read();
         affectedRows = mm.readLength();
         insertId = mm.readLength();
-        serverStatus = mm.readUB2();
-        warningCount = mm.readUB2();
+        serverStatus = mm.readUByte2();
+        warningCount = mm.readUByte2();
         if (mm.hasRemaining()) {
             this.message = mm.readBytesWithLength();
         }
@@ -38,13 +38,13 @@ public class OkPacket extends MySQLPacket {
     public void write(ChannelHandlerContext ctx) {
         // default init 256,so it can avoid buff extract
         ByteBuf buffer = ctx.alloc().buffer();
-        BufferUtil.writeUB3(buffer, calcPacketSize());
+        BufferUtil.writeUByte3(buffer, calcPacketSize());
         buffer.writeByte(packetId);
         buffer.writeByte(fieldCount);
         BufferUtil.writeLength(buffer, affectedRows);
         BufferUtil.writeLength(buffer, insertId);
-        BufferUtil.writeUB2(buffer, serverStatus);
-        BufferUtil.writeUB2(buffer, warningCount);
+        BufferUtil.writeUByte2(buffer, serverStatus);
+        BufferUtil.writeUByte2(buffer, warningCount);
         if (message != null) {
             BufferUtil.writeWithLength(buffer, message);
         }

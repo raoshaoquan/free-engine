@@ -43,15 +43,15 @@ public final class ShowDatabases {
         ByteBuf buffer = ctx.alloc().buffer();
 
         // write header
-        buffer = header.writeBuf(buffer, ctx);
+        buffer = header.writeBuf(buffer);
 
         // write fields
         for (FieldPacket field : fields) {
-            buffer = field.writeBuf(buffer, ctx);
+            buffer = field.writeBuf(buffer);
         }
 
         // write eof
-        buffer = eof.writeBuf(buffer, ctx);
+        buffer = eof.writeBuf(buffer);
 
         // write rows
         byte packetId = eof.packetId;
@@ -60,13 +60,13 @@ public final class ShowDatabases {
             RowDataPacket row = new RowDataPacket(FIELD_COUNT);
             row.add(StringUtil.encode(name, c.getCharset()));
             row.packetId = ++packetId;
-            buffer = row.writeBuf(buffer, ctx);
+            buffer = row.writeBuf(buffer);
         }
 
         // write lastEof
         EOFPacket lastEof = new EOFPacket();
         lastEof.packetId = ++packetId;
-        buffer = lastEof.writeBuf(buffer, ctx);
+        buffer = lastEof.writeBuf(buffer);
 
         // write buffer
         ctx.writeAndFlush(buffer);

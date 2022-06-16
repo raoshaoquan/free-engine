@@ -17,7 +17,7 @@ public class ResultSetHeaderPacket extends MySQLPacket {
 
     public void read(byte[] data) {
         MySQLMessage mm = new MySQLMessage(data);
-        this.packetLength = mm.readUB3();
+        this.packetLength = mm.readUByte3();
         this.packetId = mm.read();
         this.fieldCount = (int) mm.readLength();
         if (mm.hasRemaining()) {
@@ -26,9 +26,9 @@ public class ResultSetHeaderPacket extends MySQLPacket {
     }
 
     @Override
-    public ByteBuf writeBuf(ByteBuf buffer, ChannelHandlerContext ctx) {
+    public ByteBuf writeBuf(ByteBuf buffer) {
         int size = calcPacketSize();
-        BufferUtil.writeUB3(buffer, size);
+        BufferUtil.writeUByte3(buffer, size);
         buffer.writeByte(packetId);
         BufferUtil.writeLength(buffer, fieldCount);
         if (extra > 0) {

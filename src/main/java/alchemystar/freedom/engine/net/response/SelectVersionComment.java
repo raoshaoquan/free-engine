@@ -37,27 +37,27 @@ public class SelectVersionComment {
         ChannelHandlerContext ctx = c.getCtx();
         ByteBuf buffer = ctx.alloc().buffer();
         // write header
-        buffer = header.writeBuf(buffer, ctx);
+        buffer = header.writeBuf(buffer);
 
         // write fields
         for (FieldPacket field : fields) {
-            buffer = field.writeBuf(buffer, ctx);
+            buffer = field.writeBuf(buffer);
         }
 
         // write eof
-        buffer = eof.writeBuf(buffer, ctx);
+        buffer = eof.writeBuf(buffer);
 
         // write rows
         byte packetId = eof.packetId;
         RowDataPacket row = new RowDataPacket(FIELD_COUNT);
         row.add(VERSION_COMMENT);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
 
         // write last eof
         EOFPacket lastEof = new EOFPacket();
         lastEof.packetId = ++packetId;
-        buffer = lastEof.writeBuf(buffer, ctx);
+        buffer = lastEof.writeBuf(buffer);
 
         // post write
         ctx.writeAndFlush(buffer);

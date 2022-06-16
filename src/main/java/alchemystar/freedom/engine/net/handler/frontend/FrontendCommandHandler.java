@@ -45,7 +45,7 @@ public class FrontendCommandHandler extends ChannelInboundHandlerAdapter {
                 source.query(bin);
                 break;
             case MySQLPacket.COM_PING:
-                // todo ping , last access time update
+                //TODO: ping , last access time update
                 source.ping();
                 break;
             case MySQLPacket.COM_QUIT:
@@ -55,7 +55,7 @@ public class FrontendCommandHandler extends ChannelInboundHandlerAdapter {
                 source.kill(bin.data);
                 break;
             case MySQLPacket.COM_STMT_PREPARE:
-                // todo prepare支持,参考MyCat
+                //TODO: prepare支持,参考MyCat
                 source.stmtPrepare(bin.data);
                 break;
             case MySQLPacket.COM_STMT_EXECUTE:
@@ -79,7 +79,7 @@ public class FrontendCommandHandler extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             if (((IdleStateEvent) evt).state().equals(IdleState.ALL_IDLE)) {
                 Long now = (new Date()).getTime();
-                System.out.println("hahaha");
+                logger.info("Connection[ID="+source.getId()+"] idle timeout close!");
                 if (now - source.getLastActiveTime() > (SystemConfig.IDLE_TIME_OUT * 1000)) {
                     source.close();
                 }

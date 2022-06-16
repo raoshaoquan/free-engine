@@ -66,8 +66,8 @@ public class TableLoader {
         int primaryItemSize = indexEntries[startPosition].getValues()[0].getInt();
         List<Attribute> list = new ArrayList<Attribute>();
         String name = indexEntries[startPosition + 1].getValues()[0].getString();
-        boolean isUnique = indexEntries[startPosition + 2].getValues()[0].getInt() > 0 ? true : false;
-        boolean isPrimaryKey = indexEntries[startPosition + 3].getValues()[0].getInt() > 0 ? true : false;
+        boolean isUnique = indexEntries[startPosition + 2].getValues()[0].getInt() > 0;
+        boolean isPrimaryKey = indexEntries[startPosition + 3].getValues()[0].getInt() > 0;
         for (int i = (startPosition + 4); i < startPosition + primaryItemSize + 1; i++) {
             IndexEntry entry = indexEntries[i];
             Attribute attr = ValueConvertUtil.convertValue(entry.getValues());

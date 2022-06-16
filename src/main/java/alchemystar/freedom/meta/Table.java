@@ -136,7 +136,7 @@ public class Table {
         this.primaryAttribute = primaryAttribute;
     }
 
-    // todo 先不考虑持久化
+    //TODO: 先不考虑持久化
     public void loadFromDisk() {
         // 先不考虑持久化
     }

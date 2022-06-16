@@ -29,7 +29,7 @@ public class CommandPacket extends MySQLPacket {
 
     public void read(byte[] data) {
         MySQLMessage mm = new MySQLMessage(data);
-        packetLength = mm.readUB3();
+        packetLength = mm.readUByte3();
         packetId = mm.read();
         command = mm.read();
         arg = mm.readBytes();
@@ -38,7 +38,7 @@ public class CommandPacket extends MySQLPacket {
 
     public ByteBuf getByteBuf(ChannelHandlerContext ctx){
         ByteBuf buffer = ctx.alloc().buffer();
-        BufferUtil.writeUB3(buffer, calcPacketSize());
+        BufferUtil.writeUByte3(buffer, calcPacketSize());
         buffer.writeByte(packetId);
         buffer.writeByte(command);
         buffer.writeBytes(arg);

@@ -213,7 +213,7 @@ public class BufferWrapper {
         writeIndex = 0;
         readIndex = 0;
         // 对未清0的数据需要小心
-        // todo remvoe it
+        //TODO: remvoe it
         buffer = new byte[buffer.length];
     }
 

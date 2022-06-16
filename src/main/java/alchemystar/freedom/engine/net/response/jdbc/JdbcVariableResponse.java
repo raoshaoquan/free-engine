@@ -41,75 +41,75 @@ public class JdbcVariableResponse {
         ByteBuf buffer = ctx.alloc().buffer();
 
         // write header
-        buffer = header.writeBuf(buffer, ctx);
+        buffer = header.writeBuf(buffer);
 
         // write fields
         for (FieldPacket field : fields) {
-            buffer = field.writeBuf(buffer, ctx);
+            buffer = field.writeBuf(buffer);
         }
 
         // write eof
-        buffer = eof.writeBuf(buffer, ctx);
+        buffer = eof.writeBuf(buffer);
 
         // write rows
         Byte packetId = eof.packetId;
         RowDataPacket row = null;
         row = genOneRow("character_set_client", "gb2312", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("character_set_connection", "gb2312", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("character_set_results", "gb2312", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("character_set_server", "latin1", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("init_connect", "", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("interactive_timeout", "28800", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("lower_case_table_names", "2", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("max_allowed_packet", "4194304", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("net_buffer_length", "16384", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("net_write_timeout", "60", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("query_cache_size", "1048576", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("query_cache_type", "OFF", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("sql_mode", "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("system_time_zone", "CST", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("time_zone", "SYSTEM", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("tx_isolation", "REPEATABLE-READ", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         row = genOneRow("wait_timeout", "28800", c);
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
 
         // write lastEof
         EOFPacket lastEof = new EOFPacket();
         lastEof.packetId = ++packetId;
-        buffer = lastEof.writeBuf(buffer, ctx);
+        buffer = lastEof.writeBuf(buffer);
 
         // write buffer
         ctx.writeAndFlush(buffer);

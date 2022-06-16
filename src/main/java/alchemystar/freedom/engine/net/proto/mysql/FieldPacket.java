@@ -32,7 +32,7 @@ public class FieldPacket extends MySQLPacket {
      */
     public void read(byte[] data) {
         MySQLMessage mm = new MySQLMessage(data);
-        this.packetLength = mm.readUB3();
+        this.packetLength = mm.readUByte3();
         this.packetId = mm.read();
         readBody(mm);
     }
@@ -47,9 +47,9 @@ public class FieldPacket extends MySQLPacket {
     }
 
     @Override
-    public ByteBuf writeBuf(ByteBuf buffer, ChannelHandlerContext ctx) {
+    public ByteBuf writeBuf(ByteBuf buffer) {
         int size = calcPacketSize();
-        BufferUtil.writeUB3(buffer, size);
+        BufferUtil.writeUByte3(buffer, size);
         buffer.writeByte(packetId);
         writeBody(buffer);
         return buffer;
@@ -83,10 +83,10 @@ public class FieldPacket extends MySQLPacket {
         this.name = mm.readBytesWithLength();
         this.orgName = mm.readBytesWithLength();
         mm.move(1);
-        this.charsetIndex = mm.readUB2();
-        this.length = mm.readUB4();
+        this.charsetIndex = mm.readUByte2();
+        this.length = mm.readUByte4();
         this.type = mm.read() & 0xff;
-        this.flags = mm.readUB2();
+        this.flags = mm.readUByte2();
         this.decimals = mm.read();
         mm.move(FILLER.length);
         if (mm.hasRemaining()) {
@@ -103,10 +103,10 @@ public class FieldPacket extends MySQLPacket {
         BufferUtil.writeWithLength(buffer, name, nullVal);
         BufferUtil.writeWithLength(buffer, orgName, nullVal);
         buffer.writeByte((byte) 0x0C);
-        BufferUtil.writeUB2(buffer, charsetIndex);
-        BufferUtil.writeUB4(buffer, length);
+        BufferUtil.writeUByte2(buffer, charsetIndex);
+        BufferUtil.writeUByte4(buffer, length);
         buffer.writeByte((byte) (type & 0xff));
-        BufferUtil.writeUB2(buffer, flags);
+        BufferUtil.writeUByte2(buffer, flags);
         buffer.writeByte(decimals);
         buffer.writeBytes(FILLER);
         if (definition != null) {

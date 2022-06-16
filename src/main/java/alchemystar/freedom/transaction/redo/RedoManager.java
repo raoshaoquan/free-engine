@@ -25,7 +25,7 @@ public class RedoManager {
                 table.delete(log.getBefore());
                 break;
             case OpType.update:
-                // todo
+                //TODO:
                 break;
         }
     }

@@ -32,19 +32,19 @@ public class SelectIncrementResponse {
     public static void response(FrontendConnection c) {
         ChannelHandlerContext ctx = c.getCtx();
         ByteBuf buffer = ctx.alloc().buffer();
-        buffer = header.writeBuf(buffer, ctx);
+        buffer = header.writeBuf(buffer);
         for (FieldPacket field : fields) {
-            buffer = field.writeBuf(buffer, ctx);
+            buffer = field.writeBuf(buffer);
         }
-        buffer = eof.writeBuf(buffer, ctx);
+        buffer = eof.writeBuf(buffer);
         byte packetId = eof.packetId;
         RowDataPacket row = new RowDataPacket(FIELD_COUNT);
         row.add("1".getBytes());
         row.packetId = ++packetId;
-        buffer = row.writeBuf(buffer, ctx);
+        buffer = row.writeBuf(buffer);
         EOFPacket lastEof = new EOFPacket();
         lastEof.packetId = ++packetId;
-        buffer = lastEof.writeBuf(buffer, ctx);
+        buffer = lastEof.writeBuf(buffer);
         ctx.writeAndFlush(buffer);
     }
 }

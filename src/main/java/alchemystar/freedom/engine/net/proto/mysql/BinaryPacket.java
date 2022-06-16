@@ -29,7 +29,7 @@ public class BinaryPacket extends MySQLPacket {
     @Override
     public void write(ChannelHandlerContext ctx) {
         ByteBuf byteBuf = ctx.alloc().buffer();
-        BufferUtil.writeUB3(byteBuf, packetLength);
+        BufferUtil.writeUByte3(byteBuf, packetLength);
         byteBuf.writeByte(packetId);
         byteBuf.writeBytes(data);
         ctx.writeAndFlush(byteBuf);

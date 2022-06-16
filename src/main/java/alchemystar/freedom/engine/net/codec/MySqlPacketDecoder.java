@@ -24,7 +24,7 @@ public class MySqlPacketDecoder extends ByteToMessageDecoder {
     private final int maxPacketSize = 16 * 1024 * 1024;
 
     /**
-     * MySql外层结构解包
+     * <a href="https://dev.mysql.com/doc/internals/en/mysql-packet.html">MySql外层结构解包</a>
      *
      * @param ctx
      * @param in
@@ -39,7 +39,7 @@ public class MySqlPacketDecoder extends ByteToMessageDecoder {
             return;
         }
         in.markReaderIndex();
-        int packetLength = ByteUtil.readUB3(in);
+        int packetLength = ByteUtil.readUByte3(in);
         // 过载保护
         if (packetLength > maxPacketSize) {
             throw new IllegalArgumentException("Packet size over the limit " + maxPacketSize);

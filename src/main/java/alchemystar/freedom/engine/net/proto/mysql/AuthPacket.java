@@ -25,8 +25,8 @@ public class AuthPacket extends MySQLPacket{
         packetLength = bin.packetLength;
         packetId = bin.packetId;
         MySQLMessage mm = new MySQLMessage(bin.data);
-        clientFlags = mm.readUB4();
-        maxPacketSize = mm.readUB4();
+        clientFlags = mm.readUByte4();
+        maxPacketSize = mm.readUByte4();
         charsetIndex = (mm.read() & 0xff);
         int current = mm.position();
         int len = (int) mm.readLength();
@@ -48,10 +48,10 @@ public class AuthPacket extends MySQLPacket{
     public void write(Channel c) {
         // default init 256,so it can avoid buff extract
         ByteBuf buffer = c.alloc().buffer();
-        BufferUtil.writeUB3(buffer, calcPacketSize());
+        BufferUtil.writeUByte3(buffer, calcPacketSize());
         buffer.writeByte(packetId);
-        BufferUtil.writeUB4(buffer, clientFlags);
-        BufferUtil.writeUB4(buffer, maxPacketSize);
+        BufferUtil.writeUByte4(buffer, clientFlags);
+        BufferUtil.writeUByte4(buffer, maxPacketSize);
         buffer.writeByte((byte) charsetIndex);
         buffer.writeBytes(FILLER);
         if (user == null) {
@@ -74,13 +74,14 @@ public class AuthPacket extends MySQLPacket{
         c.writeAndFlush(buffer);
     }
 
+    @Override
     public void write(ChannelHandlerContext ctx) {
         // default init 256,so it can avoid buff extract
         ByteBuf buffer = ctx.alloc().buffer();
-        BufferUtil.writeUB3(buffer, calcPacketSize());
+        BufferUtil.writeUByte3(buffer, calcPacketSize());
         buffer.writeByte(packetId);
-        BufferUtil.writeUB4(buffer, clientFlags);
-        BufferUtil.writeUB4(buffer, maxPacketSize);
+        BufferUtil.writeUByte4(buffer, clientFlags);
+        BufferUtil.writeUByte4(buffer, maxPacketSize);
         buffer.writeByte((byte) charsetIndex);
         buffer.writeBytes(FILLER);
         if (user == null) {

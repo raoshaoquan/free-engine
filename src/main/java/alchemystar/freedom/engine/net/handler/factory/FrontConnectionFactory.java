@@ -22,17 +22,17 @@ public class FrontConnectionFactory {
     /**
      * MySql ThreadId Generator
      */
-    private static final AtomicInteger ACCEPT_SEQ = new AtomicInteger(0);
+    private static final AtomicInteger ACCEPT_SEQ = new AtomicInteger(1);
 
     public FrontendConnection getConnection() {
         FrontendConnection connection = new FrontendConnection();
         connection.setQueryHandler(new ServerQueryHandler(connection));
         connection.setId(ACCEPT_SEQ.getAndIncrement());
-        logger.info("connection Id=" + connection.getId());
         connection.setCharset(SystemConfig.DEFAULT_CHARSET);
         connection.setTxIsolation(SystemConfig.DEFAULT_TX_ISOLATION);
         connection.setLastActiveTime();
         connection.setSession(SessionFactory.newSession(connection));
+        logger.info("connection Id=" + connection.getId());
         return connection;
     }
 }

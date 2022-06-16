@@ -41,7 +41,7 @@ public class SelectResponse {
     }
 
     public void responseFields(FrontendConnection c, ByteBuf buffer) {
-        buffer = header.writeBuf(buffer, c.getCtx());
+        buffer = header.writeBuf(buffer);
         for (Field field : fields) {
             FieldPacket packet = null;
             if (field.getType() == Value.LONG) {
@@ -53,19 +53,19 @@ public class SelectResponse {
                 packet = PacketUtil.getField(field.getFieldName(), Fields.FIELD_TYPE_VAR_STRING);
             }
             packet.packetId = ++packetId;
-            buffer = packet.writeBuf(buffer, c.getCtx());
+            buffer = packet.writeBuf(buffer);
         }
     }
 
     public void writeEof(FrontendConnection c, ByteBuf buffer) {
         eof.packetId = ++packetId;
-        eof.writeBuf(buffer, c.getCtx());
+        eof.writeBuf(buffer);
     }
 
     public void writeLastEof(FrontendConnection c, ByteBuf buffer) {
         EOFPacket lastEof = new EOFPacket();
         lastEof.packetId = ++packetId;
-        buffer = lastEof.writeBuf(buffer, c.getCtx());
+        buffer = lastEof.writeBuf(buffer);
         c.getCtx().writeAndFlush(buffer);
     }
 
@@ -75,7 +75,7 @@ public class SelectResponse {
             row.add(StringUtil.encode(item.getString(), c.getCharset()));
         }
         row.packetId = ++packetId;
-        row.writeBuf(buffer, c.getCtx());
+        row.writeBuf(buffer);
     }
 
     public void response(FrontendConnection c) {
@@ -90,7 +90,7 @@ public class SelectResponse {
                 row.add(StringUtil.encode(value, c.getCharset()));
             }
             row.packetId = ++packetId;
-            buffer = row.writeBuf(buffer, ctx);
+            buffer = row.writeBuf(buffer);
         }
         writeLastEof(c, buffer);
     }

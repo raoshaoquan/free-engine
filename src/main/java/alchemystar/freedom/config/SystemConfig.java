@@ -39,7 +39,7 @@ public class SystemConfig {
     //int IDLE_CHECK_INTERVAL = 3600 * 1000;
     public static final int IDLE_CHECK_INTERVAL = 3600;
 
-    public static final String DEFAULT_CHARSET = "utf-8";
+    public static final String DEFAULT_CHARSET = "utf8";
 
     public static final int DEFAULT_TX_ISOLATION = Isolations.REPEATED_READ;
 }

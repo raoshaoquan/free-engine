@@ -8,7 +8,7 @@ import alchemystar.freedom.config.SystemConfig;
  * @Author lizhuyang
  */
 public class PageHeaderData {
-    // todo 变的时候 需要同步更新这里
+    //TODO: 变的时候 需要同步更新这里
     public static final Integer PAGE_HEADER_SIZE = 24;
     // Page开头的magicWorld
     private String magicWord = "Freedom";

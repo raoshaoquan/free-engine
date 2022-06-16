@@ -184,7 +184,7 @@ public abstract class MySQLPacket {
         throw new UnsupportedOperationException();
     }
 
-    public ByteBuf writeBuf(ByteBuf buffer,ChannelHandlerContext ctx) {
+    public ByteBuf writeBuf(ByteBuf buffer) {
         throw new UnsupportedOperationException();
     }
 

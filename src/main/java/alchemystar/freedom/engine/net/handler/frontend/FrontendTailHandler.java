@@ -1,10 +1,10 @@
 package alchemystar.freedom.engine.net.handler.frontend;
 
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import alchemystar.freedom.engine.net.proto.util.ErrorCode;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
@@ -12,7 +12,7 @@ import io.netty.channel.ChannelHandlerContext;
  *
  * @Author lizhuyang
  */
-public class FrontendTailHandler extends ChannelHandlerAdapter {
+public class FrontendTailHandler extends ChannelInboundHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(FrontendTailHandler.class);
 

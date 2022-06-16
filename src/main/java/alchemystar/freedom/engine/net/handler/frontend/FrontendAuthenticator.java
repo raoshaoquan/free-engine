@@ -85,7 +85,7 @@ public class FrontendAuthenticator extends ChannelInboundHandlerAdapter {
             return;
         }
         source.setUser(authPacket.user);
-        // todo
+        //TODO:
         //        if(!StringUtils.isEmpty(authPacket.database)) {
         //            source.setSchema(authPacket.database);
         //        }

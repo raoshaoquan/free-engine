@@ -7,20 +7,23 @@ import io.netty.buffer.ByteBuf;
  * @author lizhuyang
  */
 public class ByteUtil {
-    public static int readUB2(ByteBuf data) {
+    /** int<2> */
+    public static int readUByte2(ByteBuf data) {
         int i = data.readByte() & 0xff;
         i |= (data.readByte() & 0xff) << 8;
         return i;
     }
 
-    public static int readUB3(ByteBuf data) {
+    /** int<3> */
+    public static int readUByte3(ByteBuf data) {
         int i = data.readByte() & 0xff;
         i |= (data.readByte() & 0xff) << 8;
         i |= (data.readByte() & 0xff) << 16;
         return i;
     }
 
-    public static long readUB4(ByteBuf data) {
+    /** int<4> */
+    public static long readUByte4(ByteBuf data) {
         long l = data.readByte() & 0xff;
         l |= (data.readByte() & 0xff) << 8;
         l |= (data.readByte() & 0xff) << 16;
@@ -51,9 +54,9 @@ public class ByteUtil {
             case 251:
                 return MySQLMessage.NULL_LENGTH;
             case 252:
-                return readUB2(data);
+                return readUByte2(data);
             case 253:
-                return readUB3(data);
+                return readUByte3(data);
             case 254:
                 return readLong(data);
             default:
